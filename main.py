@@ -6,12 +6,14 @@ import enemies
 import battle
 import visuals
 import os
+import time
+
+def clear():    
+    os.system("cls" if os.name == 'nt' else 'clear')
 
 player = character.Character(1,len(map.map)-2, 100, None, None)
 start_pos = rooms.rooms[player.pos_y][player.pos_x]
 start_pos.visited_toggle()
-def clear():    
-    os.system("cls" if os.name == 'nt' else 'clear')
 
 while True:
     clear()
@@ -31,7 +33,7 @@ while True:
             if map.get_room(player.pos_x + 1, player.pos_y) != "w":
                 player.change_pos(1, 0)
         case "3":
-            if map.get_room(player.pos_x, player.pos_y - 1) != "w":
+            if map.get_room(player.pos_x, player.pos_y + 1) != "w":
                 player.change_pos(0, 1)
         case "4":
             if map.get_room(player.pos_x - 1, player.pos_y) != "w":
@@ -64,4 +66,38 @@ while True:
                     player.off_hand = result
 
         if type(result) == enemies.Enemies:
-            battle.battle(player, result)
+            fight_result = battle.battle(player, result)
+
+            clear()
+            match fight_result:
+                case "0":
+                    print("Du dog (sämst)")
+                    time.sleep(3)
+                    
+                    while True:
+                        clear()
+                        if input("Vill du swish 20kr till 076 119 61 66 för ett extra liv?? j/n\n") == "j":
+                            
+                            while True:
+                                clear()
+                                if input("Har du gett mig para? j/n\n") == "j":
+                                    clear()
+                                    print("Get scammed lolololol")
+                                    time.sleep(3)
+                                    break
+                                else:
+                                    clear()
+                                    print("Vad väntar du på broski? Ge mig para innan jag japp din morsa")
+                                    time.sleep(3)
+                            break
+                        else:
+                            clear()
+                            print("jo det vill du")
+                            time.sleep(3)
+
+                case "1":
+                    print(f"Du vann mot {result.enett} {result.name}!")
+                    time.sleep(2)
+                case "2":
+                    print("Fegis")
+                    time.sleep(2)

@@ -15,15 +15,13 @@ rooms = []
 
 def create_rooms():
 
-    #Fyller varje plats i listan med sina koordinater för att använda som "namn" till rummet
     for y in map.map:
         temp = []
+
         for x in y:
             temp.append(Room(x))
-            
-    
+
         rooms.append(temp)
-        
   
 def enter_room(pos_x, pos_y):
 
@@ -35,10 +33,8 @@ def enter_room(pos_x, pos_y):
             case "l":
                 result = loot.get_loot()
                 return result
-            case "f":
+            case "e":
                 result = enemies.get_enemy()
                 return result
-
-
 
 create_rooms()
